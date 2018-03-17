@@ -1,0 +1,11 @@
+<form action="" class="search-form">
+  <input type="text" 
+  class="search-form__input"
+  #queryLine>
+
+  <input routerLink="/results" 
+  type="submit" 
+  class="search-form__sumbit"
+   value="Searh on StackOverflow"
+   (click)="onSearch(queryLine.value)">
+</form>

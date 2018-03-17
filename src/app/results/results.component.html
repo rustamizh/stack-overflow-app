@@ -1,0 +1,22 @@
+<table *ngIf="questions">
+  <tr>
+    <th>Question owner name</th>
+    <th>Question title</th>
+    <th>Answers count</th>
+    <th>Tags</th>
+  </tr>
+  <tr *ngFor="let question of questions?.items">
+    <td>{{question.owner.display_name}}</td>
+    <td>{{question.title}}</td>
+    <td>{{question.answer_count}}</td>
+    <td>{{question.tags}}</td>
+  </tr>
+</table>
+
+<div *ngIf="!questions">
+    <h1>No results :( <br>
+      Try again!
+    </h1>
+
+    <!-- <a routerLink="/search">Go to search page</a> -->
+</div>
