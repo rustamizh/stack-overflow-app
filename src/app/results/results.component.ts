@@ -19,7 +19,7 @@ export class ResultsComponent implements OnInit {
     this.getQuestions();
   }
 
-  openModal() {
+  modalToggle() {
     this.modalIsOpen = !this.modalIsOpen;
   }
 
@@ -31,7 +31,7 @@ export class ResultsComponent implements OnInit {
     this._questionService.getUserQuestions(id)
     .subscribe(result => {
       this.userQuestions = result;
-      this.openModal();
+      this.modalToggle();
       console.log(this.userQuestions);
     });
   }
@@ -44,7 +44,7 @@ export class ResultsComponent implements OnInit {
     this._questionService.getTagQuestions(id, tag)
     .subscribe(result => {
       this.tagQuestions = result;
-      this.openModal();
+      this.modalToggle();
       console.log(this.tagQuestions);
     });
   }
@@ -57,6 +57,11 @@ export class ResultsComponent implements OnInit {
       this.questions = result;
       console.log(this.questions);
     });
+  }
+
+  // GET ANSWERS BY QUESTION ID
+  public getAnswers(id) {
+    this._questionService.getAnswers(id);
   }
 
 }

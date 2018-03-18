@@ -1,3 +1,14 @@
-<p>
-  answers works!
-</p>
+<table *ngIf="answers" class="table">
+    <tr>
+      <th>Author</th>
+      <th>Title</th>
+    </tr>
+    <tr *ngFor="let answer of answers?.items">
+      <td>
+        <a href="">{{answer.owner.display_name}}</a>
+      </td>
+      <td>
+        <a href="">{{answer.title}}</a>
+      </td>
+    </tr>
+  </table>

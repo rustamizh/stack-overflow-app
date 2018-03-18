@@ -8,6 +8,7 @@ export class QuestionsService {
   private questions;
   private userQuestions;
   private tagQuestions;
+  private answers;
 
   constructor(private _http: HttpClient) { }
 
@@ -39,6 +40,19 @@ export class QuestionsService {
     this.tagQuestions = this._http.get(URL);
 
     return this.tagQuestions;
+  }
+
+
+  public getAnswers(id?) {
+
+    if (!id) {
+      return this.answers;
+    }
+
+    const URL = 'http://api.stackexchange.com/2.2/questions/' + id + '/answers?order=desc&sort=activity&site=stackoverflow';
+
+    this.answers = this._http.get(URL);
+
   }
 
 }

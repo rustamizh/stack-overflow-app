@@ -10,7 +10,7 @@
       <a href="" (click)="onOwnerClick(question.owner.user_id, $event)">{{question.owner.display_name}}</a>
     </td>
     <td>
-      <a routerLink="/answers">{{question.title}}</a>
+      <a routerLink="/answers" (click)="getAnswers(question.question_id)">{{question.title}}</a>
     </td>
     <td>
       {{question.answer_count}}
@@ -32,7 +32,7 @@
 </div>
 
 
-<div class="modal-fade" [class.modal-fade--open]="modalIsOpen" (click)="openModal()">
+<div class="modal-fade" [class.modal-fade--open]="modalIsOpen" (click)="modalToggle()">
   <div class="modal-body">
       <table class="table" *ngIf="userQuestions">
         <tr>
