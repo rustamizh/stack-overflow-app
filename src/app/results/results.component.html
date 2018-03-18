@@ -1,8 +1,8 @@
-<table *ngIf="questions">
+<table *ngIf="questions" class="table">
   <tr>
-    <th>Question owner name</th>
-    <th>Question title</th>
-    <th>Answers count</th>
+    <th>Owner</th>
+    <th>Title</th>
+    <th>Answers</th>
     <th>Tags</th>
   </tr>
   <tr *ngFor="let question of questions?.items">

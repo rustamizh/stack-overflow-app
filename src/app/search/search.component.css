@@ -1,9 +1,4 @@
-.search-form {
-    width: 400px;
-    height: 100px;
-    margin: 10px auto;
-    background-color: #AFEEEE;
-    padding: 20px;
+div {
+    width: 300px;
     text-align: center;
-    border-radius: 10px;
 }
