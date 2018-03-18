@@ -30,3 +30,34 @@
 
     <!-- <a routerLink="/search">Go to search page</a> -->
 </div>
+
+
+<div class="modal-fade" [class.modal-fade--open]="modalIsOpen" (click)="openModal()">
+  <div class="modal-body">
+      <table class="table" *ngIf="userQuestions">
+        <tr>
+          <th>
+            Popular questions of {{userQuestions.items[0].owner.display_name}}
+          </th>
+        </tr>
+        <tr *ngFor="let userQuestion of userQuestions.items">
+          <td>
+            {{userQuestion.title}}
+          </td>
+        </tr>
+      </table>
+
+      <table class="table" *ngIf="tagQuestions">
+          <tr>
+            <th>
+              Popular questions by tag "something"
+            </th>
+          </tr>
+          <tr *ngFor="let tagQuestion of tagQuestions.items">
+            <td>
+              {{tagQuestion.title}}
+            </td>
+          </tr>
+        </table>
+  </div>
+</div>

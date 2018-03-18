@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { QuestionsService } from '../services/questions.service';
 
 @Component({
@@ -11,11 +11,16 @@ export class ResultsComponent implements OnInit {
   public questions;
   public userQuestions;
   public tagQuestions;
+  public modalIsOpen = false;
 
   constructor(private _questionService: QuestionsService) { }
 
   ngOnInit() {
     this.getQuestions();
+  }
+
+  openModal() {
+    this.modalIsOpen = !this.modalIsOpen;
   }
 
 
@@ -26,6 +31,7 @@ export class ResultsComponent implements OnInit {
     this._questionService.getUserQuestions(id)
     .subscribe(result => {
       this.userQuestions = result;
+      this.openModal();
       console.log(this.userQuestions);
     });
   }
@@ -38,6 +44,7 @@ export class ResultsComponent implements OnInit {
     this._questionService.getTagQuestions(id, tag)
     .subscribe(result => {
       this.tagQuestions = result;
+      this.openModal();
       console.log(this.tagQuestions);
     });
   }
