@@ -12,7 +12,8 @@ import { QuestionsService } from './services/questions.service';
 const routes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'results', component: ResultsComponent},
-  {path: '', redirectTo: 'search', pathMatch: 'full'}
+  {path: 'answers', component: AnswersComponent},
+  {path: '', redirectTo: '/search', pathMatch: 'full'}
 ];
 
 @NgModule({

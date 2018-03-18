@@ -1,14 +1,17 @@
-<div class="form-group mx-auto">
-  <form action="">
+
+<form action="">
+  <div class="form-group mx-auto">
     <input type="text" 
-    class="form-control"
-    placeholder="Enter your question"
-    #queryLine>
-  </form>
-</div>
-<div class="form-group mx-auto">
-  <button routerLink="/results"
-   type="submit"
+      class="form-control"
+      placeholder="Enter your question"
+      #queryLine>
+  </div>
+
+  <div class="form-group mx-auto text-center">
+    <button routerLink="/results"
+    type="submit"
     class="btn btn-primary mx-auto"
     (click)="onSearch(queryLine.value)">Searh on StackOverflow</button>
-</div>
+  </div> 
+</form>
+

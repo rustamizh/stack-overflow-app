@@ -6,17 +6,27 @@
     <th>Tags</th>
   </tr>
   <tr *ngFor="let question of questions?.items">
-    <td>{{question.owner.display_name}}</td>
-    <td>{{question.title}}</td>
-    <td>{{question.answer_count}}</td>
-    <td>{{question.tags}}</td>
+    <td>
+      <a href="" (click)="onOwnerClick(question.owner.user_id, $event)">{{question.owner.display_name}}</a>
+    </td>
+    <td>
+      <a routerLink="/answers">{{question.title}}</a>
+    </td>
+    <td>
+      {{question.answer_count}}
+    </td>
+    <td>
+      <ul class="list-unstyled">
+        <li *ngFor="let tag of question.tags">
+            <a href="" (click)="onTagClick(question.owner.user_id, tag, $event)">{{tag}}</a>
+        </li>
+      </ul>
+    </td>
   </tr>
 </table>
 
 <div *ngIf="!questions">
-    <h1>No results :( <br>
-      Try again!
-    </h1>
+    <h1 class="text-center">Loading...</h1>
 
     <!-- <a routerLink="/search">Go to search page</a> -->
 </div>
