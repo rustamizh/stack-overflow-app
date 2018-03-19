@@ -1,14 +1,29 @@
 <table *ngIf="answers" class="table">
     <tr>
       <th>Author</th>
-      <th>Title</th>
+      <th>Link</th>
     </tr>
     <tr *ngFor="let answer of answers?.items">
       <td>
-        <a href="">{{answer.owner.display_name}}</a>
+        {{answer.owner.display_name}}
       </td>
       <td>
-        <a href="">{{answer.title}}</a>
+        <a target="_blank" [href]="'https://stackoverflow.com/a/' + answer.answer_id">Go to answer</a>
       </td>
     </tr>
   </table>
+
+
+<div>
+    <h1 class="text-center" *ngIf="!answers && !requestTimeout">
+      Loading...
+    </h1>
+
+    <div class="text-center" *ngIf="answers && !answers?.items.length || !answers && requestTimeout">
+      
+      <h1>There is no resuts :(</h1>
+      <h4>You can</h4>
+      <h4><a routerLink="/search">search again</a> or <a routerLink="/results">go back</a></h4>
+
+    </div>
+</div>

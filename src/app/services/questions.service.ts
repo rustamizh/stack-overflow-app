@@ -26,7 +26,7 @@ export class QuestionsService {
 
 
   public getUserQuestions(id) {
-    const URL = 'http://api.stackexchange.com/2.2/users/' + id + '/questions?order=desc&sort=activity&site=stackoverflow';
+    const URL = 'http://api.stackexchange.com/2.2/users/' + id + '/questions?order=desc&sort=votes&site=stackoverflow';
 
     this.userQuestions = this._http.get(URL);
 
@@ -35,7 +35,7 @@ export class QuestionsService {
 
   public getTagQuestions(id, tag) {
 
-    const URL = 'http://api.stackexchange.com/2.2/users/' + id + '/tags/' + tag + '/top-questions?order=desc&sort=activity&site=stackoverflow';
+    const URL = 'http://api.stackexchange.com/2.2/users/' + id + '/tags/' + tag + '/top-questions?order=desc&sort=votes&site=stackoverflow';
 
     this.tagQuestions = this._http.get(URL);
 
@@ -49,7 +49,7 @@ export class QuestionsService {
       return this.answers;
     }
 
-    const URL = 'http://api.stackexchange.com/2.2/questions/' + id + '/answers?order=desc&sort=activity&site=stackoverflow';
+    const URL = 'http://api.stackexchange.com/2.2/questions/' + id + '/answers?order=desc&sort=votes&site=stackoverflow';
 
     this.answers = this._http.get(URL);
 

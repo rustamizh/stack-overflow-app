@@ -7,7 +7,7 @@
   </tr>
   <tr *ngFor="let question of questions?.items">
     <td>
-      <a href="" (click)="onOwnerClick(question.owner.user_id, $event)">{{question.owner.display_name}}</a>
+      <a href="" (click)="onOwnerClick(question.owner, $event)">{{question.owner.display_name}}</a>
     </td>
     <td>
       <a routerLink="/answers" (click)="getAnswers(question.question_id)">{{question.title}}</a>
@@ -25,19 +25,27 @@
   </tr>
 </table>
 
-<div *ngIf="!questions">
-    <h1 class="text-center">Loading...</h1>
+<div>
+    <h1 class="text-center" *ngIf="!questions && !requestTimeout">Loading...</h1>
 
-    <!-- <a routerLink="/search">Go to search page</a> -->
+    <div class="text-center" *ngIf="questions && !questions?.items.length || !questions &&  requestTimeout">
+      
+        <h1>There is no resuts :(</h1>
+        <h4>You can</h4>
+        <h4><a routerLink="/search">search again</a></h4>
+  
+      </div>
 </div>
 
 
-<div class="modal-fade" [class.modal-fade--open]="modalIsOpen" (click)="modalToggle()">
+<!-- MODALS -->
+
+<div class="modal-fade" [class.modal-fade--open]="userModalOpen" (click)="userModalToggle()">
   <div class="modal-body">
       <table class="table" *ngIf="userQuestions">
         <tr>
           <th>
-            Popular questions of {{userQuestions.items[0].owner.display_name}}
+            <h4>Popular questions of "{{currentOwner}}"</h4>
           </th>
         </tr>
         <tr *ngFor="let userQuestion of userQuestions.items">
@@ -47,10 +55,17 @@
         </tr>
       </table>
 
+      
+  </div>
+</div>
+
+
+<div class="modal-fade" [class.modal-fade--open]="tagModalOpen" (click)="tagModalToggle()">
+  <div class="modal-body">
       <table class="table" *ngIf="tagQuestions">
           <tr>
             <th>
-              Popular questions by tag "something"
+              <h4>Popular questions by tag "{{currentTag}}"</h4>
             </th>
           </tr>
           <tr *ngFor="let tagQuestion of tagQuestions.items">

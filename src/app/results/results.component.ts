@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { QuestionsService } from '../services/questions.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-results',
@@ -8,31 +9,53 @@ import { QuestionsService } from '../services/questions.service';
 })
 export class ResultsComponent implements OnInit {
 
+  private error;
+  public requestTimeout: boolean;
   public questions;
   public userQuestions;
   public tagQuestions;
-  public modalIsOpen = false;
+  public userModalOpen = false;
+  public tagModalOpen = false;
+  public currentTag;
+  public currentOwner;
 
   constructor(private _questionService: QuestionsService) { }
 
   ngOnInit() {
     this.getQuestions();
+    this.getRequest();
   }
 
-  modalToggle() {
-    this.modalIsOpen = !this.modalIsOpen;
+  tagModalToggle() {
+    this.tagModalOpen = !this.tagModalOpen;
+
+    document.body.style.overflow = this.tagModalOpen ? 'hidden' : 'auto';
+  }
+
+  userModalToggle() {
+    this.userModalOpen = !this.userModalOpen;
+
+    document.body.style.overflow = this.userModalOpen ? 'hidden' : 'auto';
+  }
+
+
+  getRequest(requestTimeout = false) {
+    setTimeout(() => {
+      this.requestTimeout = true;
+    }, 3000);
   }
 
 
   // GET QUESTIONS BY OWNER
-  public onOwnerClick(id, event) {
+  public onOwnerClick(owner, event) {
     event.preventDefault();
 
-    this._questionService.getUserQuestions(id)
+    this.currentOwner = owner.display_name;
+
+    this._questionService.getUserQuestions(owner.user_id)
     .subscribe(result => {
       this.userQuestions = result;
-      this.modalToggle();
-      console.log(this.userQuestions);
+      this.userModalToggle();
     });
   }
 
@@ -41,21 +64,27 @@ export class ResultsComponent implements OnInit {
   public onTagClick(id, tag, event) {
     event.preventDefault();
 
+    this.currentTag = tag;
+
     this._questionService.getTagQuestions(id, tag)
     .subscribe(result => {
       this.tagQuestions = result;
-      this.modalToggle();
-      console.log(this.tagQuestions);
+      this.tagModalToggle();
     });
   }
 
 
   // GET ALL QUESTIONS BY QUERY
   public getQuestions() {
-    this._questionService.getQuestions()
-    .subscribe(result => {
+    const response = this._questionService.getQuestions();
+
+    if (!response) {
+      return;
+    }
+
+    response.subscribe(
+      result => {
       this.questions = result;
-      console.log(this.questions);
     });
   }
 
