@@ -26,7 +26,12 @@
 </table>
 
 <div>
-    <h1 class="text-center" *ngIf="!questions && !requestTimeout">Loading...</h1>
+
+    <div class="text-center" *ngIf="!questions && !requestTimeout">
+      <h1 class="text-center">Loading...</h1>
+      <img src="../../assets/img/logo_spinner.webp" alt="">
+    </div>
+    
 
     <div class="text-center" *ngIf="questions && !questions?.items.length || !questions &&  requestTimeout">
       
